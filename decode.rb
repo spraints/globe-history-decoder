@@ -12,6 +12,7 @@ def main
 end
 
 SQUAWK_MARKER = (1 << 30)
+LL_SCALE = 1E6.to_f
 
 # Inside the ttf file, there are two sections: the index and buffer2.
 # https://github.com/wiedehopf/readsb/blob/c3214b36f7962793917e5830500bf611c1a04060/globe_index.c#L3318-L3321
@@ -70,6 +71,8 @@ def decode(gz, verbose:)
       else
         addrtype_5bits = (hex >> 27) & 0b11111
         addr = hex & 0x07ffffff
+        lat = lat / LL_SCALE
+        lon = lon / LL_SCALE
         s = {addr_type: addrtype_5bits, addr: addr, lat: lat, lon: lon, alt: alt, gs: gs}.inspect
       end
     end
