@@ -66,7 +66,7 @@ def decode(gz, verbose:)
       if lat & SQUAWK_MARKER == SQUAWK_MARKER
         addr = hex
         squawk = lat & ~SQUAWK_MARKER
-        callsign = [lon].pack("l<")
+        callsign = [lon, alt, gs].pack("l<s<s<")
         s = "addr: #{addr}, squawk: #{squawk}, callsign: #{callsign.inspect}"
       else
         addrtype_5bits = (hex >> 27) & 0b11111
