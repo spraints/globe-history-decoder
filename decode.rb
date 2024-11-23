@@ -81,4 +81,8 @@ def decode(gz, verbose:)
   end
 end
 
-main
+begin
+  main
+rescue Errno::EPIPE
+  # ok
+end
